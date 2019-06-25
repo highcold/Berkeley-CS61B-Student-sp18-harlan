@@ -19,9 +19,13 @@ public class TestPlanetConstructor {
      */
     private static void checkEquals(double expected, double actual, String label) {
         if (expected == actual) {
-            System.out.println("PASS: " + label + ": Expected " + expected + " and you gave " + actual);
+            System.out.println("PASS: " + label
+                    + ": Expected " + expected
+                    + " and you gave " + actual);
         } else {
-            System.out.println("FAIL: " + label + ": Expected " + expected + " and you gave " + actual);
+            System.out.println("FAIL: " + label
+                    + ": Expected " + expected
+                    + " and you gave " + actual);
         }
     }
 
@@ -33,9 +37,13 @@ public class TestPlanetConstructor {
      */
     private static void checkStringEquals(String expected, String actual, String label) {
         if (expected.equals(actual)) {
-            System.out.println("PASS: " + label + ": Expected " + expected + " and you gave " + actual);
+            System.out.println("PASS: " + label
+                    + ": Expected " + expected
+                    + " and you gave " + actual);
         } else {
-            System.out.println("FAIL: " + label + ": Expected " + expected + " and you gave " + actual);
+            System.out.println("FAIL: " + label
+                    + ": Expected " + expected
+                    + " and you gave " + actual);
         }
     }
 
@@ -58,7 +66,7 @@ public class TestPlanetConstructor {
 
         checkEquals(xxPos, p.xxPos, "xxPos");
         checkEquals(yyPos, p.yyPos, "yyPos");
-        checkEquals(xxVel ,p.xxVel, "xxVel");
+        checkEquals(xxVel, p.xxVel, "xxVel");
         checkEquals(yyVel, p.yyVel, "yyVel");
         checkEquals(mass, p.mass, "mass");
         checkStringEquals(imgFileName, p.imgFileName, "path to image");

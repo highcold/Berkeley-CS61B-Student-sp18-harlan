@@ -1,5 +1,3 @@
-import java.math.*;
-
 /**
  *  Tests Planet's update() method
  */
@@ -22,12 +20,15 @@ public class TestUpdate {
      */
     private static void checkEquals(double expected, double actual, String label, double eps) {
         if (Math.abs(expected - actual) <= eps * Math.max(expected, actual)) {
-            System.out.println("PASS: " + label + ": Expected " + expected + " and you gave " + actual);
+            System.out.println("PASS: " + label
+                    + ": Expected " + expected
+                    + " and you gave " + actual);
         } else {
-            System.out.println("FAIL: " + label + ": Expected " + expected + " and you gave " + actual);
+            System.out.println("FAIL: " + label
+                    + ": Expected " + expected
+                    + " and you gave " + actual);
         }
     }
-
 
     /**
      *  Checks the Planet class to make sure update works.

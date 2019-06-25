@@ -1,5 +1,3 @@
-import java.math.*;
-
 /**
  *  Tests calcForceExertedByXY
  */
@@ -12,8 +10,7 @@ public class TestCalcForceExertedByXY {
         checkCalcForceExertedByXY();
     }
 
-
-    /** Checks whether two doubles are approximately equal. 
+    /** Checks whether two doubles are approximately equal.
      *  @param  expected    Expected double
      *  @param  actual      Double received
      *  @param  eps         Tolerance for the double comparison.
@@ -32,11 +29,16 @@ public class TestCalcForceExertedByXY {
      */
     private static void checkEquals(double actual, double expected, String label, double eps) {
         if (approxEqual(actual, expected, eps)) {
-            System.out.println("PASS: " + label + ": Expected " + expected + " and you gave " + actual);
+            System.out.println("PASS: " + label
+                    + ": Expected " + expected
+                    + " and you gave " + actual);
         } else {
-            System.out.println("FAIL: " + label + ": Expected " + expected + " and you gave " + actual);
+            System.out.println("FAIL: " + label
+                    + ": Expected " + expected
+                    + " and you gave " + actual);
             if (approxEqual(actual, expected, eps)) {
-                System.out.println("      Hint: Your answer is exactly opposite of the correct answer.");
+                String hint = "Hint: Your answer is exactly opposite of the correct answer.";
+                System.out.println("      " + hint);
             }
         }
     }
