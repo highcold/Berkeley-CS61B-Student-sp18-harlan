@@ -3,7 +3,7 @@ import org.junit.Test;
 public class ArrayDequeTest {
     @Test
     public void resizeTest() {
-        ArrayDeque<Integer> input= new ArrayDeque();
+        ArrayDeque<Integer> input = new ArrayDeque();
         input.addLast(1);
         input.addLast(2);
         for (int i = 0; i < 8; i++) {
@@ -14,7 +14,7 @@ public class ArrayDequeTest {
 
     @Test
     public void printTest() {
-        ArrayDeque<Integer> input= new ArrayDeque();
+        ArrayDeque<Integer> input = new ArrayDeque();
         input.addLast(11);
         input.addLast(22);
         for (int i = 0; i < 8; i++) {
@@ -25,7 +25,7 @@ public class ArrayDequeTest {
 
     @Test
     public void removeTest() {
-        ArrayDeque<Integer> input= new ArrayDeque();
+        ArrayDeque<Integer> input = new ArrayDeque();
         for (int i = 0; i < 16; i++) {
             input.addLast(i);
         }
@@ -34,6 +34,15 @@ public class ArrayDequeTest {
             input.removeFirst();
         }
         System.out.println();
+    }
+
+    @Test
+    public void get() {
+        ArrayDeque<Integer> input = new ArrayDeque();
+        for (int i = 0; i < 16; i++) {
+            input.addLast(i);
+        }
+        System.out.println(input.get(0));
     }
 
 }

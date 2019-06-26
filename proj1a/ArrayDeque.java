@@ -1,4 +1,4 @@
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> {
     private int size;
     private T[] items;
     private int nextFirst;
@@ -12,15 +12,14 @@ public class ArrayDeque<T> implements Deque<T> {
         nextLast = 4;
     }
 
-    public int addHelper(int n) {
+    private int addHelper(int n) {
         return (n + 1) % items.length;
     }
 
-    public int minusHelper(int n) {
+    private int minusHelper(int n) {
         return (n + 7) % items.length;
     }
 
-    @Override
     public void addFirst(T item) {
         if (size == items.length) {
             resize(size * 2);
@@ -30,7 +29,6 @@ public class ArrayDeque<T> implements Deque<T> {
         size += 1;
     }
 
-    @Override
     public void addLast(T item) {
         if (size == items.length) {
             resize(size * 2);
@@ -40,17 +38,14 @@ public class ArrayDeque<T> implements Deque<T> {
         size += 1;
     }
 
-    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
-    @Override
     public int size() {
         return size;
     }
 
-    @Override
     public void printDeque() {
         if (size == 0) {
             return;
@@ -64,7 +59,6 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
 
-    @Override
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -83,7 +77,6 @@ public class ArrayDeque<T> implements Deque<T> {
 
     }
 
-    @Override
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -101,12 +94,15 @@ public class ArrayDeque<T> implements Deque<T> {
         return removeItem;
     }
 
-    @Override
     public T get(int index) {
-        return items[index];
+        int target = addHelper(nextFirst);
+        for (int i = 0; i < index; i++) {
+            target = addHelper(target);
+        }
+        return items[target];
     }
 
-    public void resize(int capacity) {
+    private void resize(int capacity) {
         int start = addHelper(nextFirst);
         int end = minusHelper(nextLast);
         T[] newArr = (T[]) new Object[capacity];

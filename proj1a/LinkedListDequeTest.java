@@ -2,7 +2,6 @@ import org.junit.Test;
 
 /** Performs some basic linked list tests. */
 public class LinkedListDequeTest {
-//
 //	@Test
 //	public void addFirstTest(){
 //		LinkedListDeque<Integer> lld = new LinkedListDeque<>();
@@ -31,6 +30,14 @@ public class LinkedListDequeTest {
 
 		System.out.println(lld.getRecursive(0));
 		System.out.println(lld.getRecursive(2));
+	}
+
+	@Test
+	public void getTest() {
+		LinkedListDeque<Integer> lld = new LinkedListDeque<>();
+		lld.addLast(0);
+		lld.addFirst(1);
+		System.out.println(lld.get(0));
 	}
 
 
@@ -69,7 +76,8 @@ public class LinkedListDequeTest {
 	  * && is the "and" operation. */
 	public static void addIsEmptySizeTest() {
 		System.out.println("Running add/isEmpty/Size test.");
-		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+		System.out.println("Make sure to uncomment the lines below " +
+				"(and delete this print statement).");
 
 		LinkedListDeque<String> lld1 = new LinkedListDeque<String>();
 
@@ -100,7 +108,8 @@ public class LinkedListDequeTest {
 
 		System.out.println("Running add/remove test.");
 
-		System.out.println("Make sure to uncomment the lines below (and delete this print statement).");
+		System.out.println("Make sure to uncomment " +
+				"the lines below (and delete this print statement).");
 
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 		// should be empty 
@@ -122,4 +131,5 @@ public class LinkedListDequeTest {
 		addIsEmptySizeTest();
 		addRemoveTest();
 	}
+
 } 
