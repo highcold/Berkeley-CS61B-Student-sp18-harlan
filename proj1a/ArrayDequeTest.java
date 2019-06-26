@@ -45,4 +45,24 @@ public class ArrayDequeTest {
         System.out.println(input.get(0));
     }
 
+    @Test
+    public void addTest() {
+        ArrayDeque<Integer> input = new ArrayDeque();
+        input.addFirst(0);
+        input.addFirst(1);
+        input.addLast(2);
+        input.addFirst(3);
+        input.addFirst(4);
+        input.removeLast();
+        input.addFirst(6);
+        input.get(1);
+        input.addLast(8);
+        input.addLast(9);
+        input.removeFirst();
+        input.addLast(11);
+        input.addLast(12);
+        input.addFirst(13);
+        System.out.println(input.removeFirst());
+    }
+
 }

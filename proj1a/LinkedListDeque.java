@@ -33,14 +33,6 @@ public class LinkedListDeque<T> {
         sentinel.next = sentinel;
     }
 
-    public LinkedListDeque(T item) {
-        sentinel = new Node(null);
-        Node newNode = new Node(sentinel, item, sentinel);
-        sentinel.prev = newNode;
-        sentinel.next = newNode;
-        size += 1;
-    }
-
     public void addFirst(T item) {
         Node temp = sentinel.next;
         Node newNode = new Node(sentinel, item, temp);

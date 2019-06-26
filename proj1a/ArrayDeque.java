@@ -17,7 +17,7 @@ public class ArrayDeque<T> {
     }
 
     private int minusHelper(int n) {
-        return (n + 7) % items.length;
+        return (n + items.length - 1) % items.length;
     }
 
     public void addFirst(T item) {
