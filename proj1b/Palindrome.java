@@ -32,24 +32,25 @@ public class Palindrome {
         return isPalindromeHelper(deque, cc);
     }
 
-    public boolean isPalindromeHelper(Deque deque, CharacterComparator cc) {
+    private boolean isPalindromeHelper(Deque deque, CharacterComparator cc) {
         if (deque == null || deque.size() <= 1) {
             return true;
         }
-        return cc.equalChars((char)deque.removeFirst(), (char)deque.removeLast()) && isPalindromeHelper(deque, cc);
+        return cc.equalChars((char) deque.removeFirst(),
+                (char) deque.removeLast()) && isPalindromeHelper(deque, cc);
     }
 
 
-    public boolean isPalindromeRecursive(String word) {
-        if (word == null) {
-            return true;
-        }
-        Deque deque = wordToDeque(word);
-        return isPalindromeHelper(deque);
-    }
+//    public boolean isPalindromeRecursive(String word) {
+//        if (word == null) {
+//            return true;
+//        }
+//        Deque deque = wordToDeque(word);
+//        return isPalindromeHelper(deque);
+//    }
 
-    public boolean isPalindromeHelper(Deque deque) {
-        if (deque == null || deque.size() <= 1 ) {
+    private boolean isPalindromeHelper(Deque deque) {
+        if (deque == null || deque.size() <= 1) {
             return true;
         }
         return deque.removeFirst() == deque.removeLast() && isPalindromeHelper(deque);

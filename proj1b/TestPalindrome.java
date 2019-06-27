@@ -29,18 +29,6 @@ public class TestPalindrome {
     }
 
     @Test
-    public void testIsPalindromeRecursive() {
-        String input1 = "gaohan";
-        String input2 = "caoac";
-        String input3 = "baab";
-
-        assertFalse(palindrome.isPalindromeRecursive(input1));
-        assertTrue(palindrome.isPalindromeRecursive(input2));
-        assertTrue(palindrome.isPalindromeRecursive(input3));
-
-    }
-
-    @Test
     public void testNewIsPalindrome() {
         CharacterComparator cc = new OffByOne();
         String input1 = "gasirbh";
@@ -51,5 +39,17 @@ public class TestPalindrome {
         assertTrue(palindrome.isPalindrome(input1, cc));
         assertTrue(palindrome.isPalindrome(input2, cc));
 
+    }
+
+    @Test
+    public void testOffByNIsPalindrome() {
+        CharacterComparator cc = new OffByN(3);
+        String input1 = "gasivdj";
+        String input2 = "javisdg";
+        String input3 = "baab";
+
+        assertFalse(palindrome.isPalindrome(input3, cc));
+        assertTrue(palindrome.isPalindrome(input1, cc));
+        assertTrue(palindrome.isPalindrome(input2, cc));
     }
 }
