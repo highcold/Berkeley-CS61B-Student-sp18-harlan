@@ -70,7 +70,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         return new RingBuffIterator();
     }
 
-    private class RingBuffIterator<T> implements Iterator<T> {
+    private class RingBuffIterator implements Iterator<T> {
 
         @Override
         public boolean hasNext() {
@@ -79,7 +79,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
 
         @Override
         public T next() {
-            return (T) dequeue();
+            return dequeue();
         }
     }
 }

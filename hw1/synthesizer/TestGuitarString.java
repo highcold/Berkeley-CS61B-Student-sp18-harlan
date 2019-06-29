@@ -22,7 +22,7 @@ public class TestGuitarString {
 //            aString.tic();
 //        }
 //    }
-    
+
     @Test
     public void testTic() {
         // Create a GuitarString of frequency 11025, which
