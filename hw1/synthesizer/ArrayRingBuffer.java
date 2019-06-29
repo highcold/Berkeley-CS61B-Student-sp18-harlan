@@ -1,4 +1,6 @@
 package synthesizer;
+import edu.princeton.cs.algs4.In;
+
 import java.util.Iterator;
 
 public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
@@ -58,6 +60,9 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      * Return oldest item, but don't remove it.
      */
     public T peek() {
+        if (isEmpty()) {
+            throw new RuntimeException("Ring buffer underflow");
+        }
         return rb[first];
     }
 
@@ -67,28 +72,23 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     }
 
     private class RingBuffIterator implements Iterator<T> {
+        int start = first;
+        int n = fillCount;
 
         @Override
         public boolean hasNext() {
-            return !isEmpty();
+            if (fillCount > 0) {
+                return true;
+            }
+            return false;
         }
 
         @Override
         public T next() {
-            return dequeue();
+            int returnIndex = start;
+            start = addHelper(start);
+            n--;
+            return rb[returnIndex];
         }
-    }
-
-    public static void main(String[] args) {
-        ArrayRingBuffer<Integer> arb = new ArrayRingBuffer<>(4);
-        arb.enqueue(1);
-        arb.enqueue(2);
-        arb.enqueue(3);
-        arb.dequeue();
-        arb.dequeue();
-        arb.peek();
-        arb.dequeue();
-        arb.peek();
-        arb.dequeue();
     }
 }
