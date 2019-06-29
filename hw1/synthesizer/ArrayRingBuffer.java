@@ -1,6 +1,4 @@
 package synthesizer;
-import edu.princeton.cs.algs4.In;
-
 import java.util.Iterator;
 
 public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
@@ -77,7 +75,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
 
         @Override
         public boolean hasNext() {
-            if (fillCount > 0) {
+            if (n > 0) {
                 return true;
             }
             return false;
