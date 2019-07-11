@@ -7,7 +7,7 @@ import java.util.Set;
  *  A hash table-backed Map implementation. Provides amortized constant time
  *  access to elements via get(), remove(), and put() in the best case.
  *
- *  @author Your name here
+ *  @author Han Gao
  */
 public class MyHashMap<K, V> implements Map61B<K, V> {
 
@@ -53,19 +53,49 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
+        int hashKey = hash(key);
+        return buckets[hashKey].get(key);
     }
 
     /* Associates the specified value with the specified key in this map. */
     @Override
     public void put(K key, V value) {
-        throw new UnsupportedOperationException();
+        if (loadFactor() > MAX_LF) {
+            size = 0;
+            ArrayMap<K, V>[] oldBuckets = buckets;
+            buckets = new ArrayMap[oldBuckets.length * 2];
+            for (ArrayMap am: oldBuckets) {
+                if (am != null) {
+                    Iterator iterator = am.iterator();
+                    while (iterator.hasNext()) {
+                        K oldKey = (K) iterator.next();
+                        V oldValue = (V) am.get(oldKey);
+                        this.put(oldKey, oldValue);
+                    }
+                }
+            }
+            this.put(key, value);
+        } else {
+            int hashKey = hash(key);
+            ArrayMap<K, V> am = buckets[hashKey];
+            if (am == null) {
+                buckets[hashKey] = new ArrayMap<>();
+                buckets[hashKey].put(key, value);
+            } else {
+                if (am.get(key) != null) {
+                    size--;
+                }
+                am.put(key, value);
+            }
+            size++;
+        }
+
     }
 
     /* Returns the number of key-value mappings in this map. */
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
     }
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
