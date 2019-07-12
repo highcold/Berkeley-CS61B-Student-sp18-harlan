@@ -1,5 +1,7 @@
 package hw3.hash;
 
+import edu.princeton.cs.algs4.StdRandom;
+
 public class Hint {
     public static void main(String[] args) {
         System.out.println("The powers of 256 in Java are:");
