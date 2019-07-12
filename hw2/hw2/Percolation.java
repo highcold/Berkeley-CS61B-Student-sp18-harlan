@@ -3,8 +3,9 @@ package hw2;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    private Boolean[][] grid;
+    private boolean[][] grid;
     private WeightedQuickUnionUF id;
+    private WeightedQuickUnionUF idTop;
     private int virtualTop;
     private int virtualBottom;
     private int numberOfOpenSites;
@@ -15,12 +16,7 @@ public class Percolation {
         if (N <= 0) {
             throw new java.lang.IllegalArgumentException(N + "must > 0");
         }
-        grid = new Boolean[N][N];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                grid[i][j] = false;
-            }
-        }
+        grid = new boolean[N][N];
         size = N;
         numberOfOpenSites = 0;
 
@@ -28,7 +24,10 @@ public class Percolation {
         virtualTop = N * N;
         virtualBottom = virtualTop + 1;
         virtualHelper(id, 0, N - 1, virtualTop);
-        virtualHelper(id, N * N - N,N * N - 1, virtualBottom);
+        virtualHelper(id, N * N - N, N * N - 1, virtualBottom);
+
+        idTop = new WeightedQuickUnionUF(N * N + 1);
+        virtualHelper(idTop, 0, N - 1, virtualTop);
     }
 
     private void virtualHelper(WeightedQuickUnionUF uf, int start, int end, int num) {
@@ -39,7 +38,8 @@ public class Percolation {
 
     private void validation(int row, int col) {
         if (row < 0 || row > size - 1 || col < 0 || col > size - 1) {
-            throw new java.lang.IndexOutOfBoundsException(row + " or " + col + " is not between 0 and " + (size - 1));
+            throw new java.lang.IndexOutOfBoundsException(row
+                    + " or " + col + " is not between 0 and " + (size - 1));
         }
     }
 
@@ -50,7 +50,7 @@ public class Percolation {
     // open the site (row, col) if it is not open already
     public void open(int row, int col) {
         validation(row, col);
-        if (grid[row][col] == false) {
+        if (!grid[row][col]) {
             grid[row][col] = true;
             numberOfOpenSites++;
             connectHelper(row, col);
@@ -58,12 +58,13 @@ public class Percolation {
     }
 
     private void connectHelper(int row, int col) {
-        int[][] coodinate = {{row-1, col},{row+1, col},{row, col + 1},{row, col-1}};
+        int[][] coordinate = {{row - 1, col}, {row + 1, col}, {row, col + 1}, {row, col - 1}};
         for (int i = 0; i < 4; i++) {
-            int x = coodinate[i][0];
-            int y = coodinate[i][1];
+            int x = coordinate[i][0];
+            int y = coordinate[i][1];
             if (validation(x) && validation(y) && grid[x][y]) {
                 id.union(idHelper(row, col), idHelper(x, y));
+                idTop.union(idHelper(row, col), idHelper(x, y));
             }
         }
     }
@@ -83,7 +84,7 @@ public class Percolation {
     // is the site (row, col) full?
     public boolean isFull(int row, int col) {
         int num = idHelper(row, col);
-        return id.connected(virtualTop, num) && grid[row][col];
+        return idTop.connected(virtualTop, num) && grid[row][col];
     }
 
     // number of open sites
@@ -93,10 +94,12 @@ public class Percolation {
 
     // does the system percolate?
     public boolean percolates() {
-        return id.connected(virtualTop, virtualBottom);
+        return id.connected(virtualTop, virtualBottom) && numberOfOpenSites > 0;
     }
 
-    // use for unit testing (not required)
     public static void main(String[] args) {
+        boolean[][]  b = new boolean[1][1];
+        System.out.println(b[0][0]);
     }
 }
+

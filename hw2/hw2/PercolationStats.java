@@ -9,13 +9,13 @@ public class PercolationStats {
 
     // perform T independent experiments on an N-by-N grid
     public PercolationStats(int N, int T, PercolationFactory pf) {
-        if (N <=0 || T <= 0) {
+        if (N <= 0 || T <= 0) {
             throw new java.lang.IllegalArgumentException(N + " or " + T + "must > 0");
         }
         experiements = new double[T];
         for (int i = 0; i < T; i++) {
             Percolation grid = pf.make(N);
-            while (grid.percolates() == false) {
+            while (!grid.percolates()) {
                 int x = StdRandom.uniform(N);
                 int y = StdRandom.uniform(N);
                 grid.open(x, y);
@@ -46,10 +46,4 @@ public class PercolationStats {
         return mean() + 1.96 * stddev() / Math.sqrt(time);
     }
 
-    public static void main(String[] args) {
-        PercolationStats ps = new PercolationStats(100, 1000, new PercolationFactory());
-        double low = ps.confidenceLow();
-        double high = ps.confidenceHigh();
-        System.out.printf("confidence interval: [%f : %f]\n", low, high);
-    }
 }
