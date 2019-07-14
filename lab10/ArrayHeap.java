@@ -435,9 +435,7 @@ public class ArrayHeap<T> implements ExtrinsicPQ<T> {
         int i = 0;
         String[] expected = {"a", "b", "c", "c", "d", "d", "e", "g", "h", "i"};
         while (pq.size() > 1) {
-            String s = pq.removeMin();
-            System.out.println(s);
-            assertEquals(expected[i], s);
+            assertEquals(expected[i], pq.removeMin());
             i += 1;
         }
     }
