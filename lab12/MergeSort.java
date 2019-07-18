@@ -83,8 +83,7 @@ public class MergeSort {
         while (true) {
             Queue<Item> q1 = queues.dequeue();
             if (queues.isEmpty()) {
-                items = q1;
-                return items;
+                return q1;
             }
             Queue<Item> q2 = queues.dequeue();
             queues.enqueue(mergeSortedQueues(q1, q2));
@@ -93,7 +92,7 @@ public class MergeSort {
 
     public static void main(String[] args) {
         Queue<Integer> queue = new Queue<>();
-        Integer[] a = new Integer[1000];
+        Integer[] a = new Integer[10];
         for (int i = 0; i < a.length; i++) {
             a[i] = i;
         }
@@ -101,9 +100,12 @@ public class MergeSort {
         for (int i = 0; i < a.length; i++) {
             queue.enqueue(a[i]);
         }
-        queue = MergeSort.mergeSort(queue);
+        Queue<Integer> q2 = MergeSort.mergeSort(queue);
         for (int i = 0; i < 10; i++) {
             System.out.println(queue.dequeue());
+        }
+        for (int i = 0; i < 10; i++) {
+            System.out.println(q2.dequeue());
         }
     }
 
@@ -119,22 +121,5 @@ public class MergeSort {
         q2.enqueue(100);
         Queue<Integer> q = mergeSortedQueues(q1, q2);
         System.out.println(q);
-    }
-
-    @Test
-    public void quickSortedQueueTest() {
-        Queue<Integer> queue = new Queue<>();
-        Integer[] a = new Integer[1000];
-        for (int i = 0; i < a.length; i++) {
-            a[i] = i;
-        }
-        StdRandom.shuffle(a);
-        for (int i = 0; i < a.length; i++) {
-            queue.enqueue(a[i]);
-        }
-        QuickSort.quickSort(queue);
-        for (int i = 0; i < 10; i++) {
-            System.out.println(queue.dequeue());
-        }
     }
 }
