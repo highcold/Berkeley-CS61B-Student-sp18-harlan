@@ -83,7 +83,8 @@ public class MergeSort {
         while (true) {
             Queue<Item> q1 = queues.dequeue();
             if (queues.isEmpty()) {
-                return q1;
+                items = q1;
+                return items;
             }
             Queue<Item> q2 = queues.dequeue();
             queues.enqueue(mergeSortedQueues(q1, q2));
