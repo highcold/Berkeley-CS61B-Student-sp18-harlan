@@ -77,7 +77,7 @@ public class MergeSort {
             return null;
         }
         if (items.isEmpty()) {
-            return null;
+            return items;
         }
         Queue<Queue<Item>> queues = makeSingleItemQueues(items);
         while (true) {
@@ -90,7 +90,8 @@ public class MergeSort {
         }
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void mergeSortedTest() {
         Queue<Integer> queue = new Queue<>();
         Integer[] a = new Integer[10];
         for (int i = 0; i < a.length; i++) {
@@ -101,25 +102,13 @@ public class MergeSort {
             queue.enqueue(a[i]);
         }
         Queue<Integer> q2 = MergeSort.mergeSort(queue);
-        for (int i = 0; i < 10; i++) {
-            System.out.println(queue.dequeue());
-        }
-        for (int i = 0; i < 10; i++) {
-            System.out.println(q2.dequeue());
-        }
-    }
-
-    @Test
-    public void mergeSortedQueuesTest() {
-        Queue<Integer> q1 = new Queue<>();
-        Queue<Integer> q2 = new Queue<>();
-        q1.enqueue(1);
-        q1.enqueue(5);
-        q1.enqueue(10);
-        q2.enqueue(2);
-        q2.enqueue(3);
-        q2.enqueue(100);
-        Queue<Integer> q = mergeSortedQueues(q1, q2);
-        System.out.println(q);
+        System.out.println(queue);
+        System.out.println(q2.size());
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println(queue.dequeue());
+//        }
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println(q2.dequeue());
+//        }
     }
 }

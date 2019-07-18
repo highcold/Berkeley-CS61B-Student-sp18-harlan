@@ -51,12 +51,12 @@ public class QuickSort {
             Queue<Item> less, Queue<Item> equal, Queue<Item> greater) {
         // Your code here!
         for (Item item : unsorted) {
-            if (unsorted.peek().compareTo(pivot) > 0) {
-                greater.enqueue(unsorted.dequeue());
-            } else if (unsorted.peek().compareTo(pivot) == 0) {
-                equal.enqueue(unsorted.dequeue());
+            if (item.compareTo(pivot) > 0) {
+                greater.enqueue(item);
+            } else if (item.compareTo(pivot) == 0) {
+                equal.enqueue(item);
             } else {
-                less.enqueue(unsorted.dequeue());
+                less.enqueue(item);
             }
         }
     }
@@ -92,9 +92,12 @@ public class QuickSort {
         for (int i = 0; i < a.length; i++) {
             queue.enqueue(a[i]);
         }
-        queue = QuickSort.quickSort(queue);
-        for (int i = 0; i < 5; i++) {
-            System.out.println(queue.dequeue());
-        }
+
+        Queue<Integer> q2 = QuickSort.quickSort(queue);
+        System.out.println(queue.size());
+        System.out.println(q2.size());
+//        for (int i = 0; i < 5; i++) {
+//            System.out.println(queue.dequeue());
+//        }
     }
 }
