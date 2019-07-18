@@ -1,4 +1,6 @@
 import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.StdRandom;
+import org.junit.Test;
 
 public class MergeSort {
     /**
@@ -35,7 +37,13 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
         // Your code here!
-        return null;
+        Queue<Queue<Item>> queues = new Queue<>();
+        for (Item item : items) {
+            Queue<Item> queue = new Queue<>();
+            queue.enqueue(item);
+            queues.enqueue(queue);
+        }
+        return queues;
     }
 
     /**
@@ -54,13 +62,78 @@ public class MergeSort {
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
         // Your code here!
-        return null;
+        Queue<Item> queue = new Queue<>();
+        while (!q1.isEmpty() || !q2.isEmpty()) {
+            queue.enqueue(getMin(q1, q2));
+        }
+        return queue;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
         // Your code here!
-        return items;
+        if (items == null) {
+            return null;
+        }
+        if (items.isEmpty()) {
+            return null;
+        }
+        Queue<Queue<Item>> queues = makeSingleItemQueues(items);
+        while (true) {
+            Queue<Item> q1 = queues.dequeue();
+            if (queues.isEmpty()) {
+                return q1;
+            }
+            Queue<Item> q2 = queues.dequeue();
+            queues.enqueue(mergeSortedQueues(q1, q2));
+        }
+    }
+
+    public static void main(String[] args) {
+        Queue<Integer> queue = new Queue<>();
+        Integer[] a = new Integer[1000];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = i;
+        }
+        StdRandom.shuffle(a);
+        for (int i = 0; i < a.length; i++) {
+            queue.enqueue(a[i]);
+        }
+        queue = MergeSort.mergeSort(queue);
+        for (int i = 0; i < 10; i++) {
+            System.out.println(queue.dequeue());
+        }
+    }
+
+    @Test
+    public void mergeSortedQueuesTest() {
+        Queue<Integer> q1 = new Queue<>();
+        Queue<Integer> q2 = new Queue<>();
+        q1.enqueue(1);
+        q1.enqueue(5);
+        q1.enqueue(10);
+        q2.enqueue(2);
+        q2.enqueue(3);
+        q2.enqueue(100);
+        Queue<Integer> q = mergeSortedQueues(q1, q2);
+        System.out.println(q);
+    }
+
+    @Test
+    public void quickSortedQueueTest() {
+        Queue<Integer> queue = new Queue<>();
+        Integer[] a = new Integer[1000];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = i;
+        }
+        StdRandom.shuffle(a);
+        for (int i = 0; i < a.length; i++) {
+            queue.enqueue(a[i]);
+        }
+        QuickSort.quickSort(queue);
+        for (int i = 0; i < 10; i++) {
+            System.out.println(queue.dequeue());
+        }
     }
 }

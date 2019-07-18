@@ -1,4 +1,6 @@
 import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.StdRandom;
+import org.junit.Test;
 
 public class QuickSort {
     /**
@@ -48,12 +50,51 @@ public class QuickSort {
             Queue<Item> unsorted, Item pivot,
             Queue<Item> less, Queue<Item> equal, Queue<Item> greater) {
         // Your code here!
+        while (unsorted.size() > 0) {
+            if (unsorted.peek().compareTo(pivot) > 0) {
+                greater.enqueue(unsorted.dequeue());
+            } else if (unsorted.peek().compareTo(pivot) == 0) {
+                equal.enqueue(unsorted.dequeue());
+            } else {
+                less.enqueue(unsorted.dequeue());
+            }
+        }
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> quickSort(
             Queue<Item> items) {
         // Your code here!
-        return items;
+        if (items == null) {
+            throw new IllegalArgumentException("Items must not be null");
+        }
+        if (items.size() <= 1) {
+            return items;
+        }
+
+        Item pivot = getRandomItem(items);
+        Queue<Item> less = new Queue<>();
+        Queue<Item> equal = new Queue<>();
+        Queue<Item> greater = new Queue<>();
+        partition(items, pivot, less, equal, greater);
+
+        return catenate(catenate(quickSort(less), equal), quickSort(greater));
+    }
+
+    @Test
+    public void quickSortedQueueTest() {
+        Queue<Integer> queue = new Queue<>();
+        Integer[] a = new Integer[10];
+        for (int i = 0; i < a.length; i++) {
+            a[i] = i;
+        }
+        StdRandom.shuffle(a);
+        for (int i = 0; i < a.length; i++) {
+            queue.enqueue(a[i]);
+        }
+        queue = QuickSort.quickSort(queue);
+        for (int i = 0; i < 5; i++) {
+            System.out.println(queue.dequeue());
+        }
     }
 }
